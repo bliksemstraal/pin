@@ -26,6 +26,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/bliksemstraal/pin/password"
 	"github.com/spf13/cobra"
@@ -60,7 +61,9 @@ device.
 			return err
 		}
 
-		input := args[0] + "??!!??" + secret
+		args = append(args, secret)
+
+		input := strings.Join(args, "??!!??")
 
 		gen := password.New(24, input)
 		fmt.Println(gen.Encrypt())
